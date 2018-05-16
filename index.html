@@ -140,13 +140,6 @@
       return result;
     }
 
-    const thunk = (store) => (next) => (action) => {
-      if (typeof action === 'function'){
-        return action(store.dispatch)
-      }
-      return next(action)
-    }
-
     // No more manual combination of reducers!
     const store =
       Redux.createStore(
@@ -156,7 +149,7 @@
           loading
         }),
         Redux.applyMiddleware(
-          thunk,
+          ReduxThunk.default,
           checker,
           logger)
       );
